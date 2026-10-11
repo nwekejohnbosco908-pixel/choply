@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHOPLY — A little craving. A lot of choice.</title>
+<meta name="description" content="Explore CHOPLY, a frontend food-ordering demo with a full menu, favourites, cart and simulated order tracking.">
+    <link rel="preload" href="./MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="navbar">
+    <div class="nav-container">
+        <a href="#home" class="logo">CHOPLY<span>.</span></a>
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#explore">Explore</a>
+            <a href="menu.html">Menu</a>
+            <a href="#about">About</a>
+            <a href="#tracking">Track Order</a>
+        </nav>
+
+        <div class="nav-actions">
+            <!-- Desktop Search -->
+            <div class="search-wrapper">
+                <input
+                    type="text"
+                    id="desktopSearch" aria-label="Search all dishes" enterkeyhint="search"
+                    placeholder="Search food..."
+                >
+                <button class="icon-btn search-btn" id="searchButton" aria-label="Search all dishes">
+                    <span class="material-symbols-rounded">search</span>
+                </button>
+            </div>
+
+            <!-- Profile -->
+            <button class="icon-btn" id="profileButton" aria-label="Open demo account">
+                <span class="material-symbols-rounded">person</span>
+            </button>
+
+            <!-- Cart -->
+            <button class="icon-btn cart-btn" id="cartButton" aria-label="Open cart">
+                <span class="material-symbols-rounded">shopping_cart</span>
+                <span class="cart-count">0</span>
+            </button>
+
+            <!-- Hamburger -->
+            <button class="icon-btn hamburger" id="hamburgerButton" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open navigation">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="mobile-search" id="mobileSearch">
+        <div class="mobile-search-box">
+            <span class="material-symbols-rounded">search</span>
+            <input
+                type="text"
+                id="mobileSearchInput" aria-label="Search all dishes" enterkeyhint="search"
+                placeholder="Search food..."
+            >
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#explore">Explore</a>
+        <a href="menu.html">Menu</a>
+        <a href="#about">About</a>
+        <a href="#tracking">Track Order</a>
+
+        <div class="mobile-account">
+            <p>ACCOUNT</p>
+            <button id="mobileProfile">
+                <span class="material-symbols-rounded">person</span>
+                My Profile
+            </button>
+            <button id="mobileLogout">
+                <span class="material-symbols-rounded">logout</span>
+                Logout
+            </button>
+        </div>
+    </div>
+</header>
+
+
+<main id="main">
+<div class="demo-banner"><strong>CHOPLY.</strong><span>Explore, build a cart, try an order. No real payment or delivery.</span></div>
+<section class="hero" id="home">
+    <div class="hero-content">
+        <span class="hero-label">
+            <span class="material-symbols-rounded">local_fire_department</span>
+            WHAT ARE YOU CRAVING ?
+        </span>
+        <h1>
+            Something Delicious.
+            <br>
+            <span>Something worth ordering.</span>
+        </h1>
+        <p>
+            From quick bites to proper meals,
+            discover meals, snacks and drinks from places you'll love.
+        </p>
+        <div class="hero-buttons">
+            <a href="menu.html" class="primary-btn">
+                Explore Menu
+                <span class="material-symbols-rounded">arrow_forward</span>
+            </a>
+            <a href="#tracking" class="secondary-btn">
+                Track Order
+            </a>
+        </div>
+    </div>
+    <!-- HERO FOOD SLIDER -->
+    <div class="hero-image">
+       <div class="hero-slider">
+        <!--  1 -->
+        <div data-food-id="chicken-chips" class="hero-slide active">
+            <img src="images/chikenchips.jpeg.jpg" alt="Delicious chicken meal">
+            <div class="food-info-card">
+                <span>🔥 CHOPLY PICK</span>
+                <h3>Chicken & Chips</h3>
+                <p>₦6,500</p>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div data-food-id="classic-burger" class="hero-slide">
+            <img src="images/classicburger.jpeg.jpg" alt="Delicious burger">
+            <div class="food-info-card">
+                <span>🔥 CHOPLY PICK</span>
+                <h3>Classic Burger</h3>
+                <p>₦8,000</p>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div data-food-id="jollof-chicken" class="hero-slide">
+            <img src="images/partyjollof.jpeg.jpg" alt="Jollof rice and chicken">
+
+            <div class="food-info-card">
+                <span>⭐ CUSTOMER FAVOURITE</span>
+                <h3>Jollof & Chicken</h3>
+                <p>₦5,000</p>
+            </div>
+        </div>
+        <!-- Slide 4 -->
+        <div data-food-id="chicken-shawarma" class="hero-slide">
+            <img src="images/shawarma.jpeg.jpg" alt="Fresh shawarma">
+            <div class="food-info-card">
+                <span>🔥 HOT RIGHT NOW</span>
+                <h3>Chicken Shawarma</h3>
+                <p>₦4,000</p>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="hero-pause" id="pauseHero" aria-pressed="false">Pause slides</button>
+    <!-- Slider dots -->
+    <div class="hero-dots">
+        <button class="hero-dot active" data-slide="0" aria-label="Show featured dish 1" aria-pressed="true"></button>
+        <button class="hero-dot" data-slide="1" aria-label="Show featured dish 2" aria-pressed="false"></button>
+        <button class="hero-dot" data-slide="2" aria-label="Show featured dish 3" aria-pressed="false"></button>
+        <button class="hero-dot" data-slide="3" aria-label="Show featured dish 4" aria-pressed="false"></button>
+    </div>
+</div>
+</section>
+     
+<section class="marquee-section">
+    <div class="marquee-track">
+        <div class="marquee-content">
+            <span>ORDER FROM US TODAY</span>
+            <span class="marquee-star">✦</span>
+            <span>FRESH FOOD, GOOD MOOD</span>
+            <span class="marquee-star">✦</span>
+        </div>
+
+        <div class="marquee-content" aria-hidden="true">
+            <span>ORDER FROM US TODAY</span>
+            <span class="marquee-star">✦</span>
+            <span>FRESH FOOD, GOOD MOOD</span>
+            <span class="marquee-star">✦</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- CATEGORIES -->
+ <section class="categories-section">
+    <div class="section-heading">
+        <span>WHAT ARE YOU CRAVING?</span>
+        <h2>Explore categories</h2>
+    </div>
+
+    <div class="categories-slider">
+        <button class="slider-btn prev-btn" aria-label="Previous categories"> &#10094;</button>
+
+        <div class="categories">
+            <button class="category-card" data-category="shawarma">
+                <img src="images/shawarma2.jpeg.jpg" alt="Shawarma">
+                <h3>Shawarma</h3>
+            </button>
+
+            <button class="category-card" data-category="burger">
+                <img src="images/burger.jpeg.jpg" alt="Burger">
+                <h3>Burger</h3>
+            </button>
+
+            <button class="category-card" data-category="chicken">
+                <img src="images/chiken.jpeg.jpg" alt="Chicken">
+                <h3>Chicken</h3>
+            </button>
+
+            <button class="category-card" data-category="rice">
+                <img
+                    src="images/partyjollof.jpeg.jpg"
+                    alt="Rice"
+                >
+                <h3>Rice</h3>
+            </button>
+
+            <button class="category-card" data-category="drinks">
+                <img
+                    src="images/drink.jpeg.jpg"
+                    alt="Drinks"
+                >
+                <h3>Drinks</h3>
+            </button>
+
+            <button class="category-card" data-category="barbecue">
+                <img src="images/barbeque.jpg" alt="Barbecue">
+                <h3>Barbecue</h3>
+            </button>
+
+            <button class="category-card" data-category="pasta">
+                <img src="images/spaghetti.jpeg.jpg" alt="Pasta">
+                <h3>Pasta</h3>
+            </button>
+
+            <button class="category-card" data-category="parfait">
+                <img src="images/parfait.jpeg.jpg" alt="Parfait">
+                <h3>Parfait</h3>
+            </button>
+        </div>
+        <button class="slider-btn next-btn" aria-label="Next categories"> &#10095;</button>
+    </div>
+</section>
+
+
+<section class="section" id="explore">
+    <div class="section-heading">
+        <span>CHOPLY PICKS</span>
+        <h2>Popular right now</h2>
+    </div>
+
+    <div class="food-grid" id="popularFoods" data-home-foods="chicken-shawarma,classic-burger,chicken-pasta,fruit-parfait"></div>
+</section>
+
+
+<!--  PROMO -->
+<section class="promo-section">
+    <div>
+        <span>CHOPLY SPECIAL</span>
+        <h2>Hungry? We've got you.</h2>
+        <p>A quick bite or a proper plate? Find something that fits your craving.</p>
+        <a href="menu.html" class="primary-btn">
+            Order Now
+            <span class="material-symbols-rounded">arrow_forward</span>
+        </a>
+    </div>
+</section>
+
+<!--  MENU -->
+<section class="section menu-section" id="menu">
+    <div class="preview-heading">
+        <div class="section-heading"><span>A TASTE OF THE MENU</span>
+            <h2>Find your next favourite.</h2>
+        </div>
+        <a href="menu.html" class="text-link">View all 20 dishes <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="food-grid" data-home-foods="jollof-rice,strawberry-slush,tomato-pasta,large-parfait"></div>
+</section>
+
+
+<!--  TRACK ORDER -->
+<section class="tracking-section" id="tracking">
+    <div class="tracking-content">
+        <span>ORDER TRACKING</span>
+        <h3>Follow your order.</h3>
+        <p>
+            Place your order, then enter its ID here.
+            This browser remembers your simulated orders.
+        </p>
+
+        <form id="trackingForm" novalidate>
+            <div class="tracking-input">
+                <span class="material-symbols-rounded">receipt_long</span>
+                <input
+                    type="text" id="orderNumber" aria-label="Demo order ID" placeholder="Enter order number" required >
+            </div>
+            <button class="primary-btn" type="submit">
+                Track Order
+                <span class="material-symbols-rounded">arrow_forward</span>
+            </button>
+        </form>
+        <div id="trackingResult" aria-live="polite"></div>
+    </div>
+</section>
+
+<!-- my about section -->
+<section class="about-section" id="about">
+    <div class="about-image">
+        <img
+            src="images/about1.jpeg.jpg"
+            alt="Restaurant"
+        >
+    </div>
+    <div class="about-content">
+        <span>ABOUT CHOPLY</span>
+        <h2>Good Food, Good <span id="moments">Moments.</span></h2>
+        <p>
+            CHOPLY brings your favourite meals together in one
+            simple food ordering experience.
+        </p>
+
+        <p>
+            From quick lunch to late-night cravings,
+            discover delicious food from places you love.
+        </p>
+
+        <a href="menu.html" class="primary-btn">
+            Start Ordering
+            <span class="material-symbols-rounded">arrow_forward</span>
+        </a>
+    </div>
+</section>
+
+<!--  FEATURES -->
+<section class="features-section">
+    <div class="feature">
+        <span class="material-symbols-rounded">restaurant</span>
+        <h3>Fresh Food</h3>
+        <p>Meals prepared fresh for every order.</p>
+    </div>
+
+    <div class="feature">
+        <span class="material-symbols-rounded">delivery_dining</span>
+        <h3>Fast Delivery</h3>
+        <p>Get your food delivered quickly.</p>
+    </div>
+
+    <div class="feature">
+        <span class="material-symbols-rounded">verified</span>
+        <h3>Quality First</h3>
+        <p>We care about every order.</p>
+    </div>
+
+    <div class="feature">
+        <span class="material-symbols-rounded">support_agent</span>
+        <h3>Easy Support</h3>
+        <p>We're here when you need us.</p>
+    </div>
+</section>
+</main>
+
+
+<!-- cart drawer -->
+<div class="overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Your cart">
+    <div class="drawer-header">
+        <div>
+            <span>YOUR ORDER</span>
+            <h2>Your Cart</h2>
+        </div>
+        <button class="close-btn" id="closeCart" aria-label="Close cart">
+            <span class="material-symbols-rounded">close</span>
+        </button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+        <div class="empty-cart">
+            <span class="material-symbols-rounded">shopping_cart</span>
+            <h3>Your cart is empty</h3>
+            <p>Add something delicious.</p>
+        </div>
+    </div>
+
+    <div class="cart-summary">
+        <div>
+            <span>Subtotal</span>
+            <strong id="cartSubtotal">₦0</strong>
+        </div>
+
+        <div>
+            <span>Demo delivery fee</span>
+            <strong id="deliveryFee">₦0</strong>
+        </div>
+
+        <div class="cart-total">
+            <span>Total</span>
+            <strong id="cartTotal">₦0</strong>
+        </div>
+
+        <button class="checkout-btn" id="checkoutButton">
+            Place your order
+            <span class="material-symbols-rounded">arrow_forward</span>
+        </button>
+    </div>
+</aside>
+
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModal" aria-labelledby="authTitle">
+    <div class="auth-modal">
+        <button class="modal-close" id="closeAuth" aria-label="Close sign in">
+            <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="auth-content">
+            <span class="auth-icon material-symbols-rounded">
+                person
+            </span>
+            <h2 id="authTitle">Welcome to CHOPLY</h2>
+            <p id="authDescription">
+                Sign in to continue with your order.
+            </p>
+
+            <form id="authForm" novalidate>
+                <div class="form-group signup-field hidden">
+                    <label for="auth-name">Full Name</label>
+                    <div class="input-box">
+                        <span class="material-symbols-rounded">person</span>
+                        <input type="text" id="auth-name" maxlength="80" autocomplete="name" placeholder="Enter your name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="auth-email">Email</label>
+                    <div class="input-box">
+                        <span class="material-symbols-rounded">mail</span>
+                        <input type="email" id="auth-email" autocomplete="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="auth-password">Password</label>
+                    <div class="input-box">
+                        <span class="material-symbols-rounded">lock</span>
+                        <input type="password" id="auth-password" placeholder="Your password" required>
+                        <button type="button" class="password-toggle" aria-label="Show password">
+                            <span class="material-symbols-rounded">visibility_off</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="primary-btn auth-submit" type="submit">
+                    Sign In
+                </button>
+            </form>
+            <p class="auth-switch">
+                <span id="authSwitchText">
+                    Don't have an account?
+                </span>
+                <button id="switchAuth">Create account</button>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!--  my profile modal -->
+<div class="modal-overlay" id="profileModal" aria-label="Demo profile">
+    <div class="profile-modal">
+        <button class="modal-close" id="closeProfile" aria-label="Close profile">
+            <span class="material-symbols-rounded">close</span>
+        </button>
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <span class="material-symbols-rounded">person</span>
+            </div>
+            <div>
+                <span>ACCOUNT</span>
+                <h2>My Profile</h2>
+            </div>
+        </div>
+
+        <div id="profileDetails" class="profile-details" aria-live="polite"></div>
+        <div class="profile-options">
+            <button>
+                <span class="material-symbols-rounded">person</span>
+                Personal Information
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
+
+            <button>
+                <span class="material-symbols-rounded">location_on</span>
+                Saved Addresses
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
+
+            <button>
+                <span class="material-symbols-rounded">receipt_long</span>
+                Order History
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
+
+            <button>
+                <span class="material-symbols-rounded">favorite</span>
+                Favourite Meals
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
+
+            <button id="logoutButton">
+                <span class="material-symbols-rounded">logout</span>
+                Logout
+                <span class="material-symbols-rounded">chevron_right</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="receiptModal" role="dialog" aria-modal="true" aria-labelledby="receiptTitle">
+ <div class="auth-modal">
+    <button type="button" class="modal-close" id="closeReceipt" aria-label="Close receipt">
+        <span class="material-symbols-rounded">close</span>
+    </button><div class="auth-content"><span class="eyebrow">YOUR ORDER</span>
+        <h2 id="receiptTitle">Your order is saved.</h2>
+        <p id="receiptDetails"></p>
+        <p>No payment was collected. No food will be dispatched. Copy your ID to try order tracking.</p>
+        <a class="primary-btn" id="receiptTrack" href="index.html#tracking">Track Your Order</a>
+    </div>
+</div>
+</div>
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="material-symbols-rounded">
+        check_circle
+    </span>
+    <span id="toastMessage">
+        Added to cart
+    </span>
+</div>
+
+
+<!--  Footer  -->
+<footer class="footer">
+    <div class="footer-main">
+        <div class="footer-brand">
+            <a class="logo" href="index.html">CHOPLY<span>.</span></a>
+            <p>A little craving. A lot of choice.<br>A frontend Project by Johnbosco Nweke.</p>
+        </div>
+        <div class="footer-column">
+            <h4>Explore</h4>
+            <a href="menu.html">Full menu</a>
+            <a href="index.html#explore">Popular picks</a>
+            <a href="menu.html?favourites=1">Your favourites</a>
+        </div>
+        <div class="footer-column">
+            <h4>Links</h4>
+            <a href="index.html#tracking">Track your order</a>
+            <a href="index.html#about">About CHOPLY</a>
+            <a href="index.html#home">Back to top ↑</a>
+        </div>
+        <div class="footer-column">
+            <h4>Good to know</h4>
+            <p>Sample prices in naira. Accounts, carts and orders stay on this browser. No real checkout.</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 CHOPLY · Built to explore frontend interaction.</p>
+    </div>
+</footer>
+
+<script src="foods.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
