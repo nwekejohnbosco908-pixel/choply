@@ -46,20 +46,13 @@ A shared catalogue in `foods.js` keeps dish names and prices consistent between 
 
 The idea and visual direction are mine. I use AI assistance for implementation, debugging and refinement as I continue learning and understanding the code.
 
-## Run locally
+**Status:** Live frontend demo · Deployed on Vercel
 
-1. Download the project or clone its repository when available.
-2. Open the project folder in VS Code.
-3. Keep the existing `images` folder alongside the HTML files. Image filenames and uppercase/lowercase letters must match their paths.
-4. With the **Live Server** extension installed, right-click `index.html` and choose **Open with Live Server**.
+## Live demo
 
-Alternatively, if Python is installed, run this from the project folder:
+[Explore CHOPLY](https://choply-blue.vercel.app/)
 
-```bash
-python -m http.server 5500
-```
-
-Then open **http://localhost:5500**. Use localhost or HTTPS to try the demo account flow, which needs Web Crypto.
+[View source code](https://github.com/nwekejohnbosco908-pixel/choply)
 
 ## Project files
 
@@ -82,7 +75,7 @@ To change a price or add a dish, edit `foods.js`. Keep existing dish IDs stable 
 1. Search for **Chapman** from the homepage and press Enter.
 2. Browse the menu, save a favourite and add a dish to the cart.
 3. Change the quantity and check the totals.
-4. Select **Place demo order** and create a demo account using made-up details.
+4. Select **Place order** and create an account using made-up details.
 5. Place the order after signing in, copy its `CHP-12345` style ID and try order tracking.
 
 ## Demo scope
